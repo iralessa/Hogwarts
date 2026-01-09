@@ -1,0 +1,11 @@
+GET http://localhost:8080/faculties
+
+
+POST http://localhost:8080/faculties
+Content-Type: application/json
+
+
+{
+  "name": "Проба",
+  "color": "белый"
+}
