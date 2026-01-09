@@ -33,7 +33,6 @@ public class FacultyService {
         return facultyRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Факультет с ID " + id + " не найден"));
     }
-
     public void deleteFaculty(Long id) {
         facultyRepository.deleteById(id);
     }

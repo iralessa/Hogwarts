@@ -17,7 +17,6 @@ public class StudentController {
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
-
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
         return studentService.saveStudent(student);

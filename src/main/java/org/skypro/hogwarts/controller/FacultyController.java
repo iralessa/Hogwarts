@@ -11,7 +11,6 @@ import java.util.List;
 @RequestMapping("/faculty")
 public class FacultyController {
 
-
     @Autowired
     private FacultyService facultyService;
 

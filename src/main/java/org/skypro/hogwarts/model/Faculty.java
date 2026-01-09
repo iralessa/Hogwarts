@@ -9,7 +9,6 @@ public class Faculty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_faculty")
     private Long id;
-
     @Column(name = "color_faculty", nullable = false)
     private String color;
 
