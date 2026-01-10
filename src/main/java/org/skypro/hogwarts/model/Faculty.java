@@ -1,6 +1,9 @@
 package org.skypro.hogwarts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "faculty_table")
@@ -14,6 +17,10 @@ public class Faculty {
 
     @Column(name = "name_faculty", nullable = false)
     private String name;
+
+    // Связь: один факультет — много студентов
+    @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Student> students;
 
     // Геттеры и сеттеры
     public Long getId() {
@@ -39,5 +46,8 @@ public class Faculty {
     public void setName(String name) {
         this.name = name;
     }
+    @JsonIgnore
+    public List<Student> getStudents() { return students; }
+    public void setStudents(List<Student> students) { this.students = students; }
 
 }

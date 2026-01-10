@@ -2,6 +2,7 @@ package org.skypro.hogwarts.service;
 
 import org.skypro.hogwarts.model.Student;
 import org.skypro.hogwarts.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class StudentService {
 
     // Приватное final-поле (неизменяемое)
+    @Autowired
     private final StudentRepository studentRepository;
     // Конструктор для внедрения зависимости (через Spring)
     public StudentService(StudentRepository studentRepository) {
@@ -50,5 +52,13 @@ public class StudentService {
             throw new IllegalArgumentException("Студент с ID " + id + " не найден");
         }
         studentRepository.deleteById(id);
+    }
+
+    public List<Student> getStudentsByAgeBetween(int minAge, int maxAge) {
+        return studentRepository.findByAgeBetween(minAge, maxAge);
+    }
+
+    public List<Student> getStudentsByFacultyId(Long facultyId) {
+        return studentRepository.findByFacultyId(facultyId);
     }
 }
