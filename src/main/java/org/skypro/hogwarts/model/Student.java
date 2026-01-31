@@ -15,11 +15,15 @@ public class Student {
     @Column(name = "age", nullable = false)
     private Integer age;
 
+    // Связь: много студентов — один факультет
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
+
     // Геттеры и сеттеры
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -33,4 +37,7 @@ public class Student {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    public Faculty getFaculty() { return faculty; }
+    public void setFaculty(Faculty faculty) { this.faculty = faculty; }
 }

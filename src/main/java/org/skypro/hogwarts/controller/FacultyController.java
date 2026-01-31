@@ -1,9 +1,13 @@
 package org.skypro.hogwarts.controller;
 
 import org.skypro.hogwarts.model.Faculty;
+import org.skypro.hogwarts.model.Student;
 import org.skypro.hogwarts.service.FacultyService;
+import org.skypro.hogwarts.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -11,10 +15,10 @@ import java.util.List;
 @RequestMapping("/faculty")
 public class FacultyController {
 
-
     @Autowired
     private FacultyService facultyService;
-
+    @Autowired
+    private StudentService studentService;
     // GET: все факультеты
     @GetMapping
     public List<Faculty> getAllFaculties() {
@@ -46,4 +50,16 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
     }
 
+    // GET: факультет студента по ID студента
+    @GetMapping("/student_id/{studentId}")
+    public Faculty getFacultyByStudentId(@PathVariable Long studentId) {
+        Student student = studentService.getStudentById(studentId);
+        if (student.getFaculty() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "У студента нет привязанного факультета"
+            );
+        }
+        return student.getFaculty();
+    }
 }
